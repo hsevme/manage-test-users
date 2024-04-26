@@ -1,7 +1,6 @@
 import * as users from "@fixtures/users.json";
-import * as websites from "@fixtures/websites.json";
+import * as website from "@fixtures/websites.json";
 
-const website = websites[0];
 const happyHippo = users[0];
 const happyHackor = users[1];
 
