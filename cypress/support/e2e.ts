@@ -17,9 +17,10 @@
 import "./commands";
 import "cypress-real-events/support";
 import "./commands/dismissConsentLayer";
-import "./commands/registerNewUser";
-import "./commands/loginUser";
 import "./commands/deleteUser";
+import "./commands/loginUser";
+import "./commands/logoutUser";
+import "./commands/registerNewUser";
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
