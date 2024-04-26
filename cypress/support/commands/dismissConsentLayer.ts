@@ -7,6 +7,10 @@ declare global {
   }
 }
 
+/**
+ * Dismiss the initial consent dialog and choose to give consent or not.
+ * @param inDenial true: deny consent, false: give consent
+ */
 const dismissConsentLayer = (inDenial: boolean) => {
   cy.intercept("https://aggregator.service.usercentrics.eu/aggregate/de*").as(
     "requestToUsercentricsWhenSettingsButtonClicked"

@@ -7,6 +7,11 @@ declare global {
   }
 }
 
+/**
+ * Sign up the given test user.
+ * @param user The data of the test user as defined in <p>@typings/user</p>.
+ *             This command uses first name, last name, e-mail address and password.
+ */
 const registerNewUser = (user: User) => {
   cy.get("a[href='/kundenkonto/bestellungen']")
     .should("contain.text", "Mein Konto")

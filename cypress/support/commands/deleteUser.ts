@@ -8,6 +8,9 @@ declare global {
   }
 }
 
+/**
+ * Delete the user that is currently logged in.
+ */
 const deleteUser = () => {
   cy.get("a[href='/kundenkonto/bestellungen'")
     // TODO: find better solution to this
