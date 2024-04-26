@@ -10,6 +10,7 @@ declare global {
 const loginUser = (user: User) => {
   cy.get("a[href='/kundenkonto/bestellungen']")
     .should("contain.text", "Mein Konto")
+    // TODO: find better solution to this
     .eq(0) // hsev: a[href='/kundenkonto/bestellungen'] is ambigious because there is an identical button in the burger menu => this only works on desktop resolutions
     .click();
 

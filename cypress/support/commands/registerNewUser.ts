@@ -10,10 +10,11 @@ declare global {
 const registerNewUser = (user: User) => {
   cy.get("a[href='/kundenkonto/bestellungen']")
     .should("contain.text", "Mein Konto")
+    // TODO: find better solution to this
     .eq(0) // hsev: a[href='/kundenkonto/bestellungen'] is ambigious because there is an identical button in the burger menu
-    .click();
+    .click({ force: true });
 
-  cy.get(".sign-up-hint__link").click();
+  cy.get(".sign-up-hint__link").should("be.visible").click();
   cy.get(".sign-up-dialog")
     .should("be.visible")
     .within(() => {
@@ -23,8 +24,12 @@ const registerNewUser = (user: User) => {
       cy.get("#sign-up-password").type(user.password);
       cy.get("button[type=submit]")
         .should("contain.text", "Neu Anmelden")
-        .click();
+        .click({ force: true });
     });
+
+  cy.get(".message-dialog__button")
+    .should("have.text", "Zum Kundenkonto")
+    .click({ force: true });
 };
 
 Cypress.Commands.add("registerNewUser", registerNewUser);
