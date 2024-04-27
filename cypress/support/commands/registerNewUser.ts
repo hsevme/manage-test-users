@@ -13,28 +13,18 @@ declare global {
  *             This command uses first name, last name, e-mail address and password.
  */
 const registerNewUser = (user: User) => {
-  cy.get("a[href='/kundenkonto/bestellungen']")
-    .should("contain.text", "Mein Konto")
-    // TODO: find better solution to this
-    .eq(0) // hsev: a[href='/kundenkonto/bestellungen'] is ambigious because there is an identical button in the burger menu
-    .click({ force: true });
+  cy.visit("/kundenkonto/registrierung");
 
-  cy.get(".sign-up-hint__link").should("be.visible").click();
-  cy.get(".sign-up-dialog")
-    .should("be.visible")
-    .within(() => {
-      cy.get("#sign-up-firstname").type(user.firstname);
-      cy.get("#sign-up-lastname").type(user.lastname);
-      cy.get("#sign-up-email").type(user.mail);
-      cy.get("#sign-up-password").type(user.password);
-      cy.get("button[type=submit]")
-        .should("contain.text", "Neu Anmelden")
-        .click({ force: true });
-    });
+  cy.get("#firstname").type(user.firstname);
+  cy.get("#lastname").type(user.lastname);
+  cy.get("#email").type(user.mail);
+  cy.get("#password").type(user.password);
 
-  cy.get(".message-dialog__button")
+  cy.get(".form-element__button").should("have.text", "Neu anmelden").click();
+
+  cy.get(".confirmation-content__link")
     .should("have.text", "Zum Kundenkonto")
-    .click({ force: true });
+    .click();
 };
 
 Cypress.Commands.add("registerNewUser", registerNewUser);

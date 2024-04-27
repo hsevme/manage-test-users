@@ -1,5 +1,4 @@
-import { User } from "@typings/user";
-
+export {};
 declare global {
   namespace Cypress {
     interface Chainable {
@@ -12,17 +11,7 @@ declare global {
  * Delete the user that is currently logged in.
  */
 const deleteUser = () => {
-  cy.get("a[href='/kundenkonto/bestellungen'")
-    // TODO: find better solution to this
-    .eq(0) // hsev: a[href='/kundenkonto/bestellungen'] is ambigious because there is an identical button in the burger menu => this only works on desktop resolutions
-    .should("be.visible")
-    .click();
-
-  cy.get("a[href='/kundenkonto/meine-daten'")
-    // TODO: find better solution to this
-    .eq(0) // hsev: a[href='/kundenkonto/meine-daten'] is ambigious because there is an identical button in the burger menu => this only works on desktop resolutions
-    .should("have.text", "Meine Daten")
-    .click();
+  cy.visit("/kundenkonto/meine-daten");
 
   cy.get("#account-delete-button")
     .should("contain.text", "Kundenkonto löschen")
