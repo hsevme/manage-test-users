@@ -5,10 +5,8 @@ If you know the base URL of the website, you can follow the tutorial below to ge
 
 ## features
 
-Define test users in `cypress/fixtures/users.json` and
-
-- register/delete them
-- login/logout
+Define test users in a json file and have them ready for some end-to-end tests.
+Delete those users when tests are complete.
 
 ## installation
 
@@ -27,24 +25,40 @@ Define test users in `cypress/fixtures/users.json` and
 { "baseUrl": "https://<the_specific_website's_baseUrl>" }
 ```
 
-4. `npm run cy:open` from the project's root folder
+4. optional: edit `users.json` inside the `cypress/fixtures` folder
+5. `npm run cy:open` from the project's root folder
 
 ## usage
 
-There is a single spec file called `userinteraction.cy.ts` in the `cypress/e2e` folder.
-Its `before` will register the given users from `cypress/fixtures/users.json`.
-Its `after` hook will delete them in order to clean up.
-If you only want this to happen, you can run the script already.
-This is because there is a single test that does nothing declared with `.only`, i.e:
+There is a single spec file called `userInteraction.cy.ts` in the `cypress/e2e` folder.
+Its `beforeAll` hook will register the given users from `cypress/fixtures/users.json`.
+Its `afterAll` hook will delete them in order to clean up.
+
+If this is enough for you, you can run the script already.
+There is only a single test in there which does nothing:
 
 ```ts
-it.only("does nothing", () => {});
+it("does nothing", () => {});
 ```
 
-If you want to run the other tests, you have to change the `only` call to the desired test.
-I included four convenience functions that you can use to create new tests:
+Assuming that you want to add some real tests with the users, four convenience commands are now available:
 
 - `loginUser(user: User)`
 - `logoutUser()` (assumes you are logged in)
 - `registerNewUser(user: User)`
 - `deleteUser()` (assumes you are logged in)
+
+If you want to create your own test users, edit `users.json`.
+The json file represents an array of objects of type _User_.
+So, it could look like this:
+
+```json
+[
+  {
+    "firstname": "Happy",
+    "lastname": "Hippo",
+    "mail": "degahe1869@funvane.com",
+    "password": "mYsUpErStRoNgPaSsWoRd!!11"
+  }
+]
+```
